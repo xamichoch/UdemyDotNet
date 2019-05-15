@@ -6,7 +6,7 @@ namespace CorsoDotnet.Controllers
     {
         public IActionResult Index() {
 
-            return Content("Sono la tua home preferita!");
+            return View();
         }
         
     }

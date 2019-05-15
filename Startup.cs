@@ -8,8 +8,7 @@ namespace CorsoDotnet
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        // Qui dentro aggiungiamo i servizi che vogliamo usare nel metodo Configure
         public void ConfigureServices(IServiceCollection services)
         {
            services.AddMvc()
@@ -18,7 +17,7 @@ namespace CorsoDotnet
                     });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // Qui dentro configuriamo, aggiungendo dei middleware, la pipeline di esecuzione delle richieste alla nostra applicazione
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsProduction())
