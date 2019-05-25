@@ -7,18 +7,25 @@ namespace CorsoDotnet.Controllers
 {
     public class CoursesController : Controller
     {
+        private readonly ICourseService courseService;
+
+        public CoursesController(ICourseService courseService)
+        {
+            this.courseService = courseService;
+        }
+
         public IActionResult Index()
         {
-            CourseService courseService = new CourseService();
-            List<CourseViewModel> courses = courseService.getServices();
-
+            List<CourseViewModel> courses = courseService.GetCourses();
             return View(courses);
         }
 
         public IActionResult Detail(string id)
         {
-            return View();
+            CourseDetailViewModel course = courseService.GetCourse(id);
+            return View(course);
         }
 
     }
+
 }

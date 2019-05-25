@@ -4,9 +4,9 @@ using CorsoDotnet.Models.ViewModels;
 
 namespace CorsoDotnet.Models.Services.Application
 {
-    public class CourseService
+    public class CourseService : ICourseService
     {
-        public List<CourseViewModel> getServices()
+        public List<CourseViewModel> GetCourses()
         {
             List<CourseViewModel> courses = new List<CourseViewModel>();
 
@@ -29,6 +29,13 @@ namespace CorsoDotnet.Models.Services.Application
 
             return courses;
 
+        }
+
+        public CourseDetailViewModel GetCourse(string id)
+        {
+
+            var course = new CourseDetailViewModel() { Descrizione = "Un bellissimo corso" };
+            return course;
         }
     }
 }

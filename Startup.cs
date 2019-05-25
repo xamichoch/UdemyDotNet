@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using CorsoDotnet.Models.Services.Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,7 +10,7 @@ using Microsoft.Extensions.Hosting;
 namespace CorsoDotnet
 {
     public class Startup
-    {        
+    {
         // Qui dentro aggiungiamo i servizi che vogliamo usare nel metodo Configure
         public void ConfigureServices(IServiceCollection services)
         {
@@ -18,6 +19,12 @@ namespace CorsoDotnet
                      {
                          option.EnableEndpointRouting = false;
                      });
+
+            //In questo modo mettiamo il moto il meccanismo della dependency injection, 
+            // creando una istanza di una classe CourseService che implementa l'interfaccia ICourseService
+
+            services.AddTransient<ICourseService, CourseService>();
+
         }
 
 
