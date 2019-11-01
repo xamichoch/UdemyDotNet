@@ -14,11 +14,7 @@ namespace CorsoDotnet
         // Qui dentro aggiungiamo i servizi che vogliamo usare nel metodo Configure
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                     .AddMvcOptions(option =>
-                     {
-                         option.EnableEndpointRouting = false;
-                     });
+            services.AddMvc();
 
             //In questo modo mettiamo il moto il meccanismo della dependency injection, 
             // creando una istanza di una classe CourseService che implementa l'interfaccia ICourseService
@@ -45,13 +41,18 @@ namespace CorsoDotnet
             if (env.IsProduction())
             {
                 app.UseHttpsRedirection();
+                app.UseExceptionHandler("/Error");
             }
 
             app.UseStaticFiles();
 
-            app.UseMvc(configureRoutes =>
+            //Usiamo il primo middleware del middleware Endpoint Routing
+            app.UseRouting();
+
+            //Usiamo il secondo middleware del middleware Endpoint Routing
+            app.UseEndpoints(routeBuilder =>
             {
-                configureRoutes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                routeBuilder.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
 
         }
